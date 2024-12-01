@@ -1,0 +1,10 @@
+urls:
+
+admin/
+home/
+perfil/<int:pk>
+perfil/<int:pk>/resumequestions
+questions/
+questions/resume
+search/<slug>/
+question/

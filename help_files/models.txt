@@ -1,0 +1,30 @@
+models:
+
+user_perfil:
+	localidade (FK - models.localidade)
+	cargo (CharField - choices={candidato, instrutor})
+
+perguntas:
+	autor (FK - user)
+	pergunta (CharField)
+	respostas (FK - respostas_choices)
+	fase MSA (CharField - choices={1, 2, ..., 15, 16})
+
+respostas:
+	pergunta (FK - perguntas)
+	resposta (CharField)
+	resposta_correta (true ou false)
+
+localidade:
+	localidade (CharField)
+
+jogo:
+	user (FK - user)
+	created_at (DateTimeField - auto_now_add)
+	qtd_erros (IntegerField - default=0)
+	qtd_acertos (IntegerField - default=0)
+
+perguntas_jogo:
+	game (FK - jogo)
+	question (FK - perguntas)
+	resposta (CharField)
