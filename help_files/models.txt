@@ -27,4 +27,3 @@ jogo:
 perguntas_jogo:
 	game (FK - jogo)
 	question (FK - perguntas)
-	resposta (CharField)
