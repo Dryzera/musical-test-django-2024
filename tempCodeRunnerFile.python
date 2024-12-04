@@ -1,0 +1,22 @@
+point = 0
+name = input('qual e seu nome?')
+age = input("quantos anos voce tem?")
+
+print("parabens "  + name + "!")
+
+#Escreva o seu próprio quiz!
+#level1
+condicional = input(name + ",seja bem=vindo ao quiz python!Como se escrevem os condicionais?a = ifi/elsi b = if/else c = eifi/ielse")
+#level2
+PRINT = input("Voce errou!o correto era if/else!O print e usado para:a = escrever no terminal b = encrementar o turtle c = responder o terminal")
+
+Print = input("Voce acertou!O print e usado para:a = escrever no terminal b = encrementar o turtle c = responder o terminal")
+if condicional == 'if/else' or condicional == "b" : 
+    point += 1
+    input(Print)
+    
+elif condicional != "if/else" or condicional != "b": 
+    input(PRINT)
+
+if Print == 'escrever no terminal' or Print == 'a':
+     point += 1

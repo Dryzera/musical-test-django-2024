@@ -5,4 +5,4 @@ from django.shortcuts import render
 
 # Only tests
 def index(request):
-    render(request)
+    return render(request, template_name='home.html')

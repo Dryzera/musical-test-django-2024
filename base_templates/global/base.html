@@ -1,0 +1,21 @@
+<head>
+    {% include "global/partials/_head.html" %}
+</head>
+
+<body>
+        
+    <div class="hero_area">
+        <header class="header_section">
+            {% include "global/partials/_header.html" %}
+        </header>
+    </div>
+    <main>
+        {% block content %}{% endblock content %}
+    </main>
+
+    <footer class="container-fluid footer_section "> 
+        {% include "global/partials/_footer.html" %}
+    </footer>
+
+    {% include "global/partials/_scripts.html" %}
+</body>
