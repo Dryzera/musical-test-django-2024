@@ -1,4 +1,45 @@
 {% extends "global/base.html" %}
+{% load static %}
 
 {% block content %}
+
+<section class="brand_section">
+    <div class="container">
+      <div class="heading_container">
+        <h2>
+          O que fazer?
+        </h2>
+      </div>
+      <div class="brand_container layout_padding2">
+        <div class="box">
+          <a href="{% url "main:home" %}">
+            <div class="img-box">
+              <img src="{% static "global/images/question_home.svg" %}" alt="">
+            </div>
+            <div class="detail-box">
+              <h6>
+                Perguntas
+              </h6>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="brand_container layout_padding2">
+        <div class="box">
+          <a href="{% url "main:perfil" request.user.pk %}">
+            <div class="img-box">
+              <img src="{% static "global/images/avatar_home_perfil.svg" %}" alt="">
+            </div>
+            <div class="detail-box">
+              <h6>
+                Perfil
+              </h6>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
 {% endblock content %}
+
