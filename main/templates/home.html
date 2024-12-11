@@ -7,7 +7,7 @@
     <div class="container">
       <div class="heading_container">
         <h2>
-          O que fazer?
+          O vamos que fazer {{ user.username }}?
         </h2>
       </div>
       <div class="brand_container layout_padding2">
@@ -24,6 +24,7 @@
           </a>
         </div>
       </div>
+      {% if user.is_authenticated %}
       <div class="brand_container layout_padding2">
         <div class="box">
           <a href="{% url "main:perfil" request.user.pk %}">
@@ -38,6 +39,22 @@
           </a>
         </div>
       </div>
+      {% else %}
+      <div class="brand_container layout_padding2">
+        <div class="box">
+          <a href="{% url "main:home" %}">
+            <div class="img-box">
+              <img src="{% static "global/images/avatar_home_perfil.svg" %}" alt="">
+            </div>
+            <div class="detail-box">
+              <h6>
+                Fazer Login
+              </h6>
+            </div>
+          </a>
+        </div>
+      </div>
+      {% endif %}
     </div>
   </section>
 
