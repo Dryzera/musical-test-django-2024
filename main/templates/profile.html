@@ -1,0 +1,16 @@
+{% extends "global/base.html" %}
+
+{% block content %}
+
+<div class='container'>
+    {% if user.user.first_name %}
+        <h1>Perfil de {{ user.user.first_name }} {{ user.user.last_name }}</h1>
+    {% else %}
+        <h1>Perfil de {{ user.user }}</h1>
+    {% endif %}
+    <p>Localidade: {{ user.localidade }}</p>
+    <p>Cargo: {{ user.cargo }}</p>
+</div>
+{% endblock content %}
+
+

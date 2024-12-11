@@ -1,13 +1,13 @@
 from django.contrib import admin
 from django.urls import path, include
-from .views import index
+from .views import *
 
 app_name = 'main'
 
 urlpatterns = [
     # perfil urls
     path('perfil/<int:pk>/resumegames/', view=index, name='resumegames'),
-    path('perfil/<int:pk>/', view=index, name='perfil'),
+    path('perfil/<int:pk>/', view=ProfileHome.as_view(), name='perfil'),
 
     # game urls
     path('game/', view=index, name='game'),

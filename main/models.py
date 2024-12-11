@@ -4,6 +4,9 @@ from django.contrib.auth.models import User
 class Localidade(models.Model):
     localidade = models.CharField(max_length=500, blank=False, null=False)
 
+    def __str__(self):
+        return self.localidade
+
 class UserPerfil(models.Model):
     CARGO_CHOICES = [
         ('Candidato', 'candidato'),
@@ -15,6 +18,9 @@ class UserPerfil(models.Model):
 
     class Meta:
         verbose_name = 'Perfil de úsuario'
+
+    def __str__(self):
+        return f'Perfil de {self.user}'
 
 class Perguntas(models.Model):
     FASES_MSA_CHOICES = [
