@@ -9,7 +9,7 @@ class ProfileHome(DetailView):
 
     def get(self, *args, **kwargs):
         if not self.request.user.is_authenticated:
-            messages.error(self.request, 'Você não está logado. Faça login.')
+            messages.error(self.request, 'Você não está logado. Faça login abaixo.')
             return redirect('main:home')
 
         self.id = self.kwargs['pk']

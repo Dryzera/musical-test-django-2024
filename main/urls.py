@@ -14,6 +14,10 @@ urlpatterns = [
     path('game/resume/', view=index, name='game_resume'),
     path('games/', view=index, name='games'),
 
+    # login urls
+    path('login/', view=Login.as_view(), name='login'),
+    path('logout/', view=logout_user, name='logout'),
+
     # generic urls
     path('search/<slug:slug>/', view=index, name='search'),
     path('', view=index, name='home'),
