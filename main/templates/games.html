@@ -1,0 +1,37 @@
+{% extends "global/base.html" %}
+{% load static %}
+
+{% block content %}
+<section class='brand_section'>
+{% if user.is_authenticated %}
+<div class="container">
+    <div class="heading_container">
+      <h2>
+        Vamos iniciar um jogo?
+      </h2>
+    </div>
+</div>
+
+<div class="brand_container layout_padding2">
+    <div class="box">
+        <a href="{% url "main:home" %}">
+          <div class="detail-box">
+            <div class="img-box">
+                <img src="{% static "global/images/question_home.svg" %}" alt="">
+              </div>
+            <h6>
+              Iniciar novo jogo
+            </h6>
+          </div>
+        </a>
+      </div>
+</div>
+{% else %}
+    <div class='brand_container layout_padding2'>
+        <div>
+            <p>Faça <a href="{% url "login" %}">login</a> para jogar...</p>
+        </div>
+    </div>
+{% endif %}
+</section>
+{% endblock content %}

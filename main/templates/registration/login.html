@@ -3,12 +3,24 @@
 {% block content %}
 <section class='brand_section'>
     <div class="container">
-<form method="post">
-    {% csrf_token %}
-    {{ form }}
-    <button type="submit">Logar</button>
-</form>
-</div>
+        <div class="heading_container">
+          <h2>
+            Faça login
+          </h2>
+        </div>
+    </div>
+    <div class="container">
+        <div class='brand_container'>
+            <div class='layout_padding2'>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form }}
+                    <button type="submit">Logar</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
 </section>
 
 {% endblock content %}
