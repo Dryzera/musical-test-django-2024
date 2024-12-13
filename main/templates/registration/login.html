@@ -1,0 +1,14 @@
+{% extends "global/base.html" %}
+
+{% block content %}
+<section class='brand_section'>
+    <div class="container">
+<form method="post">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">Logar</button>
+</form>
+</div>
+</section>
+
+{% endblock content %}
