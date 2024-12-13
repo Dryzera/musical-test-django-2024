@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.auth.models import Group
 
 class Localidade(models.Model):
     localidade = models.CharField(max_length=500, blank=False, null=False)
@@ -8,13 +9,15 @@ class Localidade(models.Model):
         return self.localidade
 
 class UserPerfil(models.Model):
-    CARGO_CHOICES = [
-        ('Candidato', 'candidato'),
-        ('Instrutor', 'instrutor'),
+    CATEGORIAS_CHOICES = [
+        ('Cordas', 'Cordas'),
+        ('Madeiras', 'Madeiras'),
+        ('Metais', 'Metais'),
     ]
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     localidade = models.ForeignKey(Localidade, on_delete=models.SET_NULL, null=True)
-    cargo = models.CharField(choices=CARGO_CHOICES, max_length=15, blank=False)
+    grupo = models.ForeignKey(Group, on_delete=models.SET_NULL, null=True, blank=False)
+    categoria = models.CharField(choices=CATEGORIAS_CHOICES, max_length=10, blank=False)
 
     class Meta:
         verbose_name = 'Perfil de úsuario'
