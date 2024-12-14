@@ -14,7 +14,7 @@ class UserPerfil(models.Model):
         ('Madeiras', 'Madeiras'),
         ('Metais', 'Metais'),
     ]
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     localidade = models.ForeignKey(Localidade, on_delete=models.SET_NULL, null=True)
     grupo = models.ForeignKey(Group, on_delete=models.SET_NULL, null=True, blank=False)
     categoria = models.CharField(choices=CATEGORIAS_CHOICES, max_length=10, blank=False)
@@ -24,6 +24,16 @@ class UserPerfil(models.Model):
 
     def __str__(self):
         return f'Perfil de {self.user}'
+    
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        if self.user and self.grupo:
+            self.user.groups.add(self.grupo)
+
+            if self.grupo.name == 'instrutores':
+                self.user.is_staff = True
+                self.user.save()
 
 class Perguntas(models.Model):
     FASES_MSA_CHOICES = [
