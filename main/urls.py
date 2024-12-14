@@ -10,9 +10,9 @@ urlpatterns = [
     path('perfil/<int:pk>/', view=ProfileHome.as_view(), name='perfil'),
 
     # game urls
-    path('game/', view=index, name='game'),
+    path('game/<int:pk>/', view=Game.as_view(), name='game'),
     path('game/resume/', view=index, name='game_resume'),
-    path('games/', view=game, name='games'),
+    path('games/', view=games, name='games'),
 
     # generic urls
     path('search/<slug:slug>/', view=index, name='search'),

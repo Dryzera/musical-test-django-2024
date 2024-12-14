@@ -1,0 +1,15 @@
+<form action="" method="post">
+    {% csrf_token %}
+    {% for pergunta_jogo in perguntas %}
+        <p>{{ pergunta_jogo.question.pergunta }}</p>
+        
+        {% for resposta in pergunta_jogo.question.respostas.all %}
+            <p>
+                <input type="radio" name="resposta_{{ pergunta_jogo.id }}" value="{{ resposta.id }}">
+                {{ resposta.resposta }}
+            </p>
+        {% endfor %}
+    {% endfor %}
+
+    <button type="submit">Enviar Respostas</button>
+</form>
