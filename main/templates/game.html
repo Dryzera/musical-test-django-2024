@@ -1,15 +1,37 @@
+{% extends "global/base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="heading_container">
+      <h2>
+        Questionário:
+      </h2>
+    </div>
+</div>
+<div class="flex">
 <form action="" method="post">
     {% csrf_token %}
     {% for pergunta_jogo in perguntas %}
-        <p>{{ pergunta_jogo.question.pergunta }}</p>
-        
-        {% for resposta in pergunta_jogo.question.respostas.all %}
-            <p>
-                <input type="radio" name="resposta_{{ pergunta_jogo.id }}" value="{{ resposta.id }}">
-                {{ resposta.resposta }}
-            </p>
-        {% endfor %}
+        <div class="pergunta">
+            <div class="en">
+            <span class="fase-pergunta">{{ pergunta_jogo.question.get_fase_display }} MSA</span>
+            <h3>{{ pergunta_jogo.question.pergunta }}</h3> 
+            <span class="dificuldade-pergunta">({{ pergunta_jogo.question.get_dificuldade_display }})</span>
+        </div>
+            {% for resposta in pergunta_jogo.question.respostas.all %}
+                <div class="pergunta_resposta">
+                    <p>
+                        <input type="radio" class='input-radio' name="resposta_{{ pergunta_jogo.id }}" value="{{ resposta.id }}">
+                        {{ resposta.resposta }}
+                    </p>
+                </div>
+            {% endfor %}
+        </div>
     {% endfor %}
-
-    <button type="submit">Enviar Respostas</button>
+    
+    <div class="flex">
+        <button type="submit" class='btn-form'>Enviar Respostas</button>
+    </div>
 </form>
+</div>
+{% endblock content %}
