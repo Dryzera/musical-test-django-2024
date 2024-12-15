@@ -3,7 +3,11 @@ from .models import Perguntas, PerguntasJogo, Localidade, UserPerfil, Jogo, Resp
 
 # Register your models here.
 
-admin.site.register(Jogo)
+@admin.register(Jogo)
+class JogoAdmin(admin.ModelAdmin):
+    list_display = ('user', 'created_at',)
+    readonly_fields = ('created_at', 'finished_at')
+
 admin.site.register(Localidade)
 admin.site.register(UserPerfil)
 admin.site.register(PerguntasJogo)

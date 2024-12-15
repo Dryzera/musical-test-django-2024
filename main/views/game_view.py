@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
 from django.views.generic import FormView
-from main.models import Jogo, Perguntas, PerguntasJogo
+from main.models import Jogo, Perguntas, PerguntasJogo, Respostas
 from random import choice, sample
 from django.http import HttpResponse
 from django.contrib import messages
+from main.utils.utils_views import get_questions
+from datetime import datetime
 
 
 def games(request):
@@ -16,24 +18,49 @@ class Game(FormView):
         if not request.user.is_authenticated:
             messages.error(request, 'Você precisa fazer login para jogar.')
             return redirect('login')
-        
-        def get_questions():
-            game = Jogo.objects.create(user=request.user)
-            perguntas = list(Perguntas.objects.all())
-            qtd_perguntas = len(perguntas)
 
-            if qtd_perguntas == 0:
-                return HttpResponse("Nenhuma pergunta disponível.", status=404)
-            num_perguntas_desejadas = 0
+        user_games = Jogo.objects.filter(user=request.user).last()
+        hora_agora = datetime.now().timestamp()
 
-            if num_perguntas_desejadas > qtd_perguntas:
-                num_perguntas_desejadas = qtd_perguntas
-            perguntas_selecionadas = sample(perguntas, num_perguntas_desejadas)
+        if user_games is None:
+            get_questions(request)
+        else:
+            if (user_games.created_at.timestamp() + 200) < hora_agora:   
+                # caso a pessoa saia e volte depois
+                if user_games.qtd_acertos == 0 or user_games.qtd_erros == 0:
+                    messages.info(request, 'Você tem um jogo criado. Continue-o.')
+                else:
+                    get_questions(request)
 
-            for pergunta in perguntas_selecionadas:
-                PerguntasJogo.objects.create(game=game, question=pergunta)
-            return HttpResponse("Jogo iniciado com sucesso.")
+            # caso a pessoa termine antes de 10 minutos e queira jogar mais
+            elif user_games.qtd_acertos != 0 or user_games.qtd_erros != 0:
+                get_questions(request)
+            else:
+                messages.error(request, 'Você tem um jogo criado a menos de 10 minutos. Continue este.')
 
-        get_questions()
-        user_games = Jogo.objects.filter(user=request.user).first()
         return render(request, self.template_name, context={'perguntas': PerguntasJogo.objects.filter(game=user_games)})
+    
+    def post(self, request, *args, **kwargs):
+        respostas = {}
+
+        for key, value in request.POST.items():
+            if key.startswith("resposta_") or key.startswith("jogo"):
+                respostas[key] = value
+        
+        print(respostas)
+
+        game = Jogo.objects.filter(pk=respostas['jogo']).first()
+
+        for resposta in respostas.values():
+            if resposta == respostas['jogo']:
+                continue
+            resposta_correta = Respostas.objects.filter(pk=resposta).first()
+            if resposta_correta.resposta_correta:
+                game.qtd_acertos += 1
+                game.save()
+            else:
+                game.qtd_erros += 1
+                game.save()
+        game.finished_at = datetime.now()
+        game.save()
+        return redirect('main:game_resume')

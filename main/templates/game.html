@@ -12,6 +12,7 @@
 <form action="" method="post">
     {% csrf_token %}
     {% for pergunta_jogo in perguntas %}
+        <input type="hidden" name="jogo" value="{{ pergunta_jogo.game.pk }}">
         <div class="pergunta">
             <div class="en">
             <span class="fase-pergunta">{{ pergunta_jogo.question.get_fase_display }} MSA</span>

@@ -13,7 +13,8 @@ class ProfileHome(DetailView):
             return redirect('main:home')
 
         self.id = self.kwargs['pk']
-        self.usuario = UserPerfil.objects.filter(user=self.id).first()
+        self.usuario = UserPerfil.objects.get(user=self.id)
+        print(self.usuario.pk)
 
         return super().get(*args, **kwargs)
     
