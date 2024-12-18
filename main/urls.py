@@ -11,7 +11,7 @@ urlpatterns = [
 
     # game urls
     path('game/<int:pk>/', view=Game.as_view(), name='game'),
-    path('game/resume/', view=index, name='game_resume'),
+    path('game/resume/<slug:slug>', view=GameResume.as_view(), name='game_resume'),
     path('games/', view=games, name='games'),
 
     # generic urls

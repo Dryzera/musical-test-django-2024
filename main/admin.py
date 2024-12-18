@@ -6,7 +6,7 @@ from .models import Perguntas, PerguntasJogo, Localidade, UserPerfil, Jogo, Resp
 @admin.register(Jogo)
 class JogoAdmin(admin.ModelAdmin):
     list_display = ('user', 'created_at',)
-    readonly_fields = ('created_at', 'finished_at')
+    readonly_fields = ('created_at', 'finished_at', 'slug')
 
 admin.site.register(Localidade)
 admin.site.register(UserPerfil)

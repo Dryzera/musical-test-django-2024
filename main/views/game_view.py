@@ -1,14 +1,13 @@
 from django.shortcuts import render, redirect
-from django.views.generic import FormView
-from main.models import Jogo, Perguntas, PerguntasJogo, Respostas
-from random import choice, sample
-from django.http import HttpResponse
+from django.views.generic import FormView, DetailView
+from main.models import Jogo, PerguntasJogo, Respostas
 from django.contrib import messages
 from main.utils.utils_views import get_questions
 from datetime import datetime
 
 
 def games(request):
+
     return render(request, 'games.html')
 
 class Game(FormView):
@@ -18,7 +17,6 @@ class Game(FormView):
         if not request.user.is_authenticated:
             messages.error(request, 'Você precisa fazer login para jogar.')
             return redirect('login')
-
         user_games = Jogo.objects.filter(user=request.user).last()
         hora_agora = datetime.now().timestamp()
 
@@ -64,3 +62,7 @@ class Game(FormView):
         game.finished_at = datetime.now()
         game.save()
         return redirect('main:game_resume')
+
+class GameResume(DetailView):
+    def __init__(self, **kwargs):
+        self.slug = kwargs['slug']
