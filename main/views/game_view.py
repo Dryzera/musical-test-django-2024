@@ -25,7 +25,7 @@ class Game(FormView):
         if user_games is None:
             get_questions(request)
         else:
-            if (user_games.created_at.timestamp() + 200) < hora_agora:   
+            if (user_games.created_at.timestamp() + 600) < hora_agora:   
                 # caso a pessoa saia e volte depois
                 if user_games.qtd_acertos == 0 or user_games.qtd_erros == 0:
                     messages.info(request, 'Você tem um jogo criado. Continue-o.')
