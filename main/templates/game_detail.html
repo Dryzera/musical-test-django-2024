@@ -1,0 +1,10 @@
+{% extends "global/base.html" %}
+
+{% block content %}
+    {% if game_model.user.first_name %}
+        <h1>Jogo de {{ game_model.user.first_name }}</h1>
+    {% else %}
+        <h1>Jogo de {{ game_model.user.username }}</h1>
+    {% endif %}
+    
+{% endblock content %}

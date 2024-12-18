@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import FormView, DetailView
 from main.models import Jogo, PerguntasJogo, Respostas
 from django.contrib import messages
 from main.utils.utils_views import get_questions
-from datetime import datetime
+from datetime import datetime, timedelta
+from django.http import HttpResponse, Http404
 
 
 def games(request):
@@ -47,7 +48,7 @@ class Game(FormView):
         
         print(respostas)
 
-        game = Jogo.objects.filter(pk=respostas['jogo']).first()
+        game = Jogo.objects.filter(pk=respostas['jogo']).last()
 
         for resposta in respostas.values():
             if resposta == respostas['jogo']:
@@ -61,8 +62,22 @@ class Game(FormView):
                 game.save()
         game.finished_at = datetime.now()
         game.save()
-        return redirect('main:game_resume')
+        return redirect('main:game_resume', slug=game.slug)
 
 class GameResume(DetailView):
-    def __init__(self, **kwargs):
-        self.slug = kwargs['slug']
+    model = Jogo
+    template_name = 'game_detail.html'
+
+    def get_object(self):
+        return get_object_or_404(Jogo, slug=self.kwargs.get('slug'))
+        
+
+    def get(self, request, *args, **kwargs): 
+        game = self.get_object()
+        game_duration = game.finished_at - game.created_at
+        context = {
+            'game_model': game,
+            'game_duration': game_duration,
+        }
+        
+        return render(request, self.template_name, context)
