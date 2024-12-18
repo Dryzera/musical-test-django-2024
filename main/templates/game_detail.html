@@ -1,10 +1,30 @@
 {% extends "global/base.html" %}
 
 {% block content %}
-    {% if game_model.user.first_name %}
-        <h1>Jogo de {{ game_model.user.first_name }}</h1>
-    {% else %}
-        <h1>Jogo de {{ game_model.user.username }}</h1>
-    {% endif %}
+<div class="container">
+    <div class="heading_container">
+      <h2>
+        {% if game_model.user.first_name %}
+            Jogo de {{ game_model.user.first_name }}
+        {% else %}
+            Jogo de {{ game_model.user.username }}
+        {% endif %}
+      </h2>
+    </div>
+</div>
+
+<div class="grid_resume_game">
+    <div class="cabeca">
+        <div class="stats">Criado Em: {{ game_model.created_at }}</div>
+        <div class="stats">Finalizado Em: {{ game_model.finished_at }}</div>
+        <div class="stats">Duração Total: {{ game_duration }}</div>
+    </div>
+    <div class="cabeca">
+        <div class="stats">Total de Perguntas: {{ total_questions }}</div>
+        <div class="stats">Quantidade de Acertos: {{ game_model.qtd_acertos }}</div>
+        <div class="stats">Quantidade de Erros: {{ game_model.qtd_erros }}</div>
+    </div>
+</div>
+
     
 {% endblock content %}

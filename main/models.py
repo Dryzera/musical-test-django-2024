@@ -1,9 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
-from datetime import datetime
-from django.utils import timezone
-from main.utils.generate_slug import generate_slug
 
 class Localidade(models.Model):
     localidade = models.CharField(max_length=500, blank=False, null=False)
@@ -93,12 +90,6 @@ class Jogo(models.Model):
 
     def __str__(self):
         return f'Jogo de {self.user}'
-    
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = generate_slug()
-
-        return super().save(*args, **kwargs)
 
 class PerguntasJogo(models.Model):
     game = models.ForeignKey(Jogo, on_delete=models.CASCADE, related_name="perguntas_jogo")
