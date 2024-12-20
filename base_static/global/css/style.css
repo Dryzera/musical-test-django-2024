@@ -1171,3 +1171,31 @@ a:focus {
 .btn-form:hover {
   transform: translateY(-10px)
 }
+
+.flex_resume_game {
+  margin: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.grid_resume_game {
+  display: grid;
+  grid-template-columns: repeat(2, 500px);
+  background-color: #c6c6c6;
+  padding: 2rem;
+  border-radius: 1rem;
+}
+
+.cabeca {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stats {
+  width: 400px;
+  background-color: #eee;
+  padding: 1rem;
+  margin: 1rem;
+  box-shadow: 4px 4px 7px black;
+}
