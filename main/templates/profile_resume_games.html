@@ -1,0 +1,26 @@
+{% extends "global/base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="heading_container">
+      <h2>
+        Lista de jogos de {{ user.user.username }}
+      </h2>
+    </div>
+</div>
+
+<div class="games">
+    {% if not games %}
+        <div class="resume_game-game resume_game-not-found">
+            <p>Ah, esse úsuario não criou nenhum jogo ainda... 😔</p>
+        </div>
+    {% else %}
+    {% for game in games %}
+        <div class='resume_game-game'>
+            Jogo de {{ game.created_at|date:'d/m/Y' }} 
+            <a class='material-symbols-outlined align-middle' href="{% url "main:game_resume" game.slug %}">open_in_new</a>
+        </div>
+    {% endfor %}
+    {% endif %}
+</div>
+{% endblock content %}

@@ -1197,5 +1197,31 @@ a:focus {
   background-color: #eee;
   padding: 1rem;
   margin: 1rem;
-  box-shadow: 4px 4px 7px black;
+  box-shadow: 4px 4px 5px black;
+}
+
+.games {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 2rem;
+}
+
+.resume_game-not-found {
+  padding: 3rem 2rem;
+  text-align: center;
+  font-size: 30px;
+}
+
+.resume_game-game {
+  background-color: #eee;
+  border-radius: 1rem;
+  font-size: 20px;
+  margin: 1rem 0;
+  padding: 2rem;
+}
+
+.align-middle {
+  text-align: middle;
 }

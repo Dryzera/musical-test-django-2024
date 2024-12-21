@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic import DetailView
-from main.models import UserPerfil
+from main.models import UserPerfil, Jogo
 from django.contrib import messages
 
 class ProfileHome(DetailView):
@@ -14,7 +14,6 @@ class ProfileHome(DetailView):
 
         self.id = self.kwargs['pk']
         self.usuario = UserPerfil.objects.get(user=self.id)
-        print(self.usuario.pk)
 
         return super().get(*args, **kwargs)
     
@@ -24,3 +23,14 @@ class ProfileHome(DetailView):
         context['user'] = self.usuario
 
         return context
+    
+def profile_resume_games(request, pk):
+    context = {}
+
+    game = Jogo.objects.filter(user=pk).all()
+    usuario = UserPerfil.objects.get(user=pk)
+
+    context['games'] = game
+    context['user'] = usuario
+
+    return render(request, 'profile_resume_games.html', context)
