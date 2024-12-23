@@ -52,7 +52,8 @@ class Perguntas(models.Model):
         ('13', 'Fase 13'),
         ('14', 'Fase 14'),
         ('15', 'Fase 15'),
-        ('16', 'Fase 16')
+        ('16', 'Fase 16'),
+        ('N/D', 'Sem Fase'),
     ]
     NIVEL_DIFICULDADE_CHOICE = [
         ('Muito Facil', 'Muito Facil'),

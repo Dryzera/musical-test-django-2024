@@ -48,8 +48,6 @@ class Game(FormView):
         for key, value in request.POST.items():
             if key.startswith("resposta_") or key.startswith("jogo"):
                 respostas[key] = value
-        
-        print(respostas)
 
         game = Jogo.objects.filter(pk=respostas['jogo']).last()
 

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import DetailView
 from main.models import UserPerfil, Jogo
 from django.contrib import messages
@@ -8,12 +8,8 @@ class ProfileHome(DetailView):
     template_name = 'profile.html'
 
     def get(self, *args, **kwargs):
-        if not self.request.user.is_authenticated:
-            messages.error(self.request, 'Você não está logado. Faça login abaixo.')
-            return redirect('main:home')
-
         self.id = self.kwargs['pk']
-        self.usuario = UserPerfil.objects.get(user=self.id)
+        self.usuario = get_object_or_404(UserPerfil, user=self.id)
 
         return super().get(*args, **kwargs)
     
