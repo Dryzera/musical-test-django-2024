@@ -75,7 +75,11 @@ class GameResume(DetailView):
 
     def get(self, request, *args, **kwargs): 
         game = self.get_object()
-        game_duration = game.finished_at - game.created_at
+        try:
+            game_duration = game.finished_at - game.created_at
+        except TypeError:
+            raise Http404('Jogo provavelmente não finalizado')
+
         total_questions = game.qtd_acertos + game.qtd_erros
         context = {
             'game_model': game,

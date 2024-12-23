@@ -1,10 +1,21 @@
 {% extends "global/base.html" %}
 
 {% block content %}
+
+<div class="menu_profile">
+    <h2 class='title_menu_profile'>Menu</h2>
+    <ul>
+        <li><a href="{% url 'main:perfil' pk %}">Perfil</a></li>
+        {% if user.pk == pk %}
+            <li><a href="{% url 'password_change' %}">Mudar Senha</a></li>
+        {% endif %}
+    </ul>
+</div>
+
 <div class="container">
     <div class="heading_container">
       <h2>
-        Lista de jogos de {{ user.user.username }}
+        Lista de jogos de <a href="{% url 'main:perfil' pk %}">{{ user.user.username }}</a>
       </h2>
     </div>
 </div>

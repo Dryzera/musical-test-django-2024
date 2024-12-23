@@ -2,14 +2,27 @@
 
 {% block content %}
 
+<div class="menu_profile">
+    <h2 class='title_menu_profile'>Menu</h2>
+    <ul>
+        <li><a href="{% url 'main:resumegames' pk %}">Jogos</a></li>
+        {% if user.pk == pk %}
+            <li><a href="{% url 'password_change' %}">Mudar Senha</a></li>
+        {% endif %}
+    </ul>
+</div>
+
+
 <div class='container'>
     {% if user.user.first_name %}
         <h1>Perfil de {{ user.user.first_name }} {{ user.user.last_name }}</h1>
     {% else %}
         <h1>Perfil de {{ user.user }}</h1>
     {% endif %}
-    <p>Localidade: {{ user.localidade }}</p>
-    <p>Grupo dos: {{ user.grupo }}</p>
+    <div class="info_profile">
+        <p>Localidade: {{ user.localidade }}</p>
+        <p>Grupo dos: {{ user.grupo }}</p>
+    </div>
 </div>
 {% endblock content %}
 

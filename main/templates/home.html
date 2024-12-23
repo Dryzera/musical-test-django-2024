@@ -27,7 +27,7 @@
       {% if user.is_authenticated %}
       <div class="brand_container layout_padding2">
         <div class="box">
-          <a href="{% url "main:perfil" request.user.pk %}">
+          <a href="{% url "main:perfil" user.pk %}">
             <div class="img-box">
               <img src="{% static "global/images/avatar_home_perfil.svg" %}" alt="">
             </div>

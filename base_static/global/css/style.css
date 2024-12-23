@@ -1225,3 +1225,48 @@ a:focus {
 .align-middle {
   text-align: middle;
 }
+
+.menu_profile {
+  position: absolute;
+  background-color: #eee;
+  width: 10vw;
+  min-height: 30vh;
+}
+
+.title_menu_profile {
+  text-align: center;
+  padding: 1rem 0;
+  text-decoration: underline;
+}
+
+.menu_profile ul {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+}
+
+.menu_profile li {
+  padding: 0.5rem 0 0 1rem;
+
+}
+
+.menu_profile a {
+  text-decoration: none;
+}
+
+.site_name {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 20px;
+  color: #24d278;
+}
+
+.grid_search {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.profile {
+  background-color: #eee;
+  width: 200px;
+  margin: 1rem;
+}

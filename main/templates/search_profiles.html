@@ -1,0 +1,17 @@
+{% extends "global/base.html" %}
+
+{% block content %}
+
+<div class='container'>
+    <div class="grid_search">
+    {% for profile in profiles %}
+        <div class="profile">
+            <h3 class="profile_name"><a href="{% url "main:perfil" profile.user.pk %}">{{ profile.user.username }}</a></h3>
+            <p class="profile_localidade">{{ profile.localidade }}</p>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+{% endblock content %}
+
+

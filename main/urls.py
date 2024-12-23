@@ -15,7 +15,7 @@ urlpatterns = [
     path('games/', view=games, name='games'),
 
     # generic urls
-    path('search/<slug:slug>/', view=index, name='search'),
+    path('search-profiles/', view=SearchProfiles.as_view(), name='search_profiles'),
     path('logout/', view=logout_user, name='logout'),
     path('', view=index, name='home'),
 ]
