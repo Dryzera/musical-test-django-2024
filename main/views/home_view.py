@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView
-from main.models import UserPerfil
+from main.models import UserPerfil, Localidade
 
 # Only tests
 def index(request):
@@ -17,4 +17,5 @@ class SearchProfiles(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['profiles'] = self.get_queryset()
+        context['localidades'] = Localidade.objects.all()
         return context

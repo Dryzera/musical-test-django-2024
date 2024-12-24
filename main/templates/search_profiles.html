@@ -2,6 +2,46 @@
 
 {% block content %}
 
+<div class="filter_search">
+    <form action="">
+        <fieldset>
+            <legend>Busca</legend>
+        
+            <label for="pesquisa">Busque algum usuário</label>
+            <input type="text" id='pesquisa' placeholder='Digite aqui'>
+        </fieldset>
+
+        <fieldset>
+            <legend>Filtros</legend>
+            <label for="localidade-filter">Localidade</label>
+            <select name="" id="localidade-filter">
+                <option value="none" selected>Qualquer</option>
+                {% for localidade in localidades %}
+                <option value="{{ localidade.localidade }}">{{ localidade.localidade }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="categoria-filter">Categoria</label>
+            <select name="" id="categoria-filter">
+                <option value="none" selected>Qualquer</option>
+                <option value="madeiras">Madeiras</option>
+                <option value="cordas">Cordas</option>
+                <option value="metais">Metais</option>
+            </select>   
+            
+            <label for="cargo-filter">Cargo</label>
+            <select name="" id="cargo-filter">
+                <option value="none" selected>Qualquer</option>
+                <option value="candidatos">Candidatos</option>
+                <option value="instrutores">Instrutores</option>
+            </select>             
+    </fieldset>
+    <button type="submit">Buscar</button>
+    </form>
+</div>
+
+<h2>Perfis</h2>
+
 <div class='container'>
     <div class="grid_search">
     {% for profile in profiles %}
