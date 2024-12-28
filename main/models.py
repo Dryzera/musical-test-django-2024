@@ -64,7 +64,7 @@ class Perguntas(models.Model):
     ]
 
 
-    author = models.ForeignKey(UserPerfil, on_delete=models.SET_NULL, null=True, blank=False)
+    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=False)
     pergunta = models.CharField(max_length=200)
     fase = models.CharField(choices=FASES_MSA_CHOICES, max_length=10, blank=False)
     dificuldade = models.CharField(choices=NIVEL_DIFICULDADE_CHOICE, max_length=13, blank=False)
