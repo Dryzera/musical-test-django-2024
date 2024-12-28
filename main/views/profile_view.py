@@ -25,7 +25,7 @@ class ProfileHome(DetailView):
 def profile_resume_games(request, pk):
     context = {}
 
-    game = Jogo.objects.filter(user=pk).all()
+    game = Jogo.objects.filter(user=pk).all().order_by('-pk')
     usuario = UserPerfil.objects.get(user=pk)
 
     context['games'] = game

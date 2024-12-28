@@ -3,37 +3,38 @@
 {% block content %}
 
 <div class="filter_search">
-    <form action="">
+    <form action="{% url "main:search_profiles" %}" method='post'>
+        {% csrf_token %}
         <fieldset>
             <legend>Busca</legend>
         
             <label for="pesquisa">Busque algum usuário</label>
-            <input type="text" id='pesquisa' placeholder='Digite aqui'>
+            <input name='name-user' type="text" id='pesquisa' placeholder='Digite aqui'>
         </fieldset>
 
         <fieldset>
             <legend>Filtros</legend>
             <label for="localidade-filter">Localidade</label>
-            <select name="" id="localidade-filter">
-                <option value="none" selected>Qualquer</option>
+            <select name="localidade" id="localidade-filter">
+                <option value="None" selected>Qualquer</option>
                 {% for localidade in localidades %}
-                <option value="{{ localidade.localidade }}">{{ localidade.localidade }}</option>
+                <option value="{{ localidade.pk }}">{{ localidade.localidade }}</option>
                 {% endfor %}
             </select>
 
             <label for="categoria-filter">Categoria</label>
-            <select name="" id="categoria-filter">
-                <option value="none" selected>Qualquer</option>
+            <select name="categoria" id="categoria-filter">
+                <option value="None" selected>Qualquer</option>
                 <option value="madeiras">Madeiras</option>
                 <option value="cordas">Cordas</option>
                 <option value="metais">Metais</option>
             </select>   
             
             <label for="cargo-filter">Cargo</label>
-            <select name="" id="cargo-filter">
-                <option value="none" selected>Qualquer</option>
-                <option value="candidatos">Candidatos</option>
-                <option value="instrutores">Instrutores</option>
+            <select name="cargo" id="cargo-filter">
+                <option value='None' selected>Qualquer</option>
+                <option value="1">Candidatos</option>
+                <option value="2">Instrutores</option>
             </select>             
     </fieldset>
     <button type="submit">Buscar</button>
@@ -42,6 +43,7 @@
 
 <h2>Perfis</h2>
 
+{% if not list_match_users %}
 <div class='container'>
     <div class="grid_search">
     {% for profile in profiles %}
@@ -52,6 +54,20 @@
     {% endfor %}
     </div>
 </div>
+{% else %}
+<div class='container'>
+    <div class="grid_search">
+    {% for match_users in list_match_users %}
+        {% for user in match_users %}
+            <div class="profile">
+                <h3 class="profile_name"><a href="{% url "main:perfil" user.pk %}">{{ user.user }}</a></h3>
+                <p class="profile_localidade">{{ user.localidade }}</p>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    </div>
+</div>
+{% endif %}
 {% endblock content %}
 
 
